@@ -14,6 +14,7 @@ final class ListOfTasksViewController: UIViewController {
     
     private var unfinishedTasksData: [TaskModel] = [] {
         didSet {
+            self.listofTasksTableView.reloadData()
             print(self.unfinishedTasksData)
         }
     }
@@ -73,7 +74,7 @@ final class ListOfTasksViewController: UIViewController {
 
 extension ListOfTasksViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        self.dataa.count
+        self.unfinishedTasksData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -89,6 +90,12 @@ extension ListOfTasksViewController {
     @objc private func addNewtaskTapped() {
         let vc = TaskAddingViewController()
         self.navigationController?.pushViewController(vc, animated: true)
+        
+        vc.closure = { [weak self] newTask in
+            guard let self else { return }
+            self.unfinishedTasksData.append(newTask)
+            dump(self.unfinishedTasksData)
+        }
     }
 }
 

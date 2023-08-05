@@ -12,6 +12,7 @@ final class TaskAddingViewController: UIViewController {
     // MARK: - Parameters
     
     private var newTask = TaskModel(taskTitle: "")
+    private var priorityLevel: String = ""
     var closure: ((TaskModel) -> ())?
     
     // MARK: - GUI
@@ -19,59 +20,53 @@ final class TaskAddingViewController: UIViewController {
     private lazy var priorityStackView: UIStackView = {
         let view = UIStackView()
         view.axis = .horizontal
-        view.backgroundColor = .white
+        view.backgroundColor = .lightGray
         return view
     }()
     
     private lazy var redPriorityButton: UIButton = {
         let button = UIButton(type: .custom)
         button.addTarget(self, action: #selector(self.redPriorityButtonTapped), for: .touchUpInside)
-        button.backgroundColor = .red
         button.tag = 1
-        button.setImage(UIImage(named: "red_flag"), for: .normal)
-        let highlightedImage = UIImage(named: "red_flag_highlighted")
-            button.setImage(highlightedImage, for: .highlighted)
+        button.setImage(UIImage(named: PriorityImagesNames.red.rawValue), for: .normal)
         return button
     }()
     
     private lazy var blackPriorityButton: UIButton = {
         let button = UIButton(type: .custom)
         button.addTarget(self, action: #selector(self.blackPriorityButtonTapped), for: .touchUpInside)
-        button.backgroundColor = .black
         button.tag = 1
-        button.setImage(UIImage(named: "black_flag"), for: .normal)
+        button.setImage(UIImage(named: PriorityImagesNames.black.rawValue), for: .normal)
         return button
     }()
     
     private lazy var bluePriorityButton: UIButton = {
         let button = UIButton(type: .custom)
         button.addTarget(self, action: #selector(self.bluePriorityButtonTapped), for: .touchUpInside)
-        button.backgroundColor = .blue
         button.tag = 1
-        button.setImage(UIImage(named: "blue_flag"), for: .normal)
+        button.setImage(UIImage(named: PriorityImagesNames.blue.rawValue), for: .normal)
         return button
     }()
     
     private lazy var greenPriorityButton: UIButton = {
         let button = UIButton(type: .custom)
         button.addTarget(self, action: #selector(self.greenPriorityButtonTapped), for: .touchUpInside)
-        button.backgroundColor = .green
         button.tag = 1
-        button.setImage(UIImage(named: "green_flag"), for: .normal)
+        button.setImage(UIImage(named: PriorityImagesNames.green.rawValue), for: .normal)
         return button
     }()
     
     private lazy var titleTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Type your task title here ..."
-        textField.backgroundColor = .green
+        textField.backgroundColor = .white
         return textField
         
     }()
     
     private lazy var decriptionTextField: UITextField = {
         let textField = UITextField()
-        textField.backgroundColor = .cyan
+        textField.backgroundColor = .white
         textField.placeholder = "Type your task decription here ..."
         return textField
     }()
@@ -103,14 +98,14 @@ final class TaskAddingViewController: UIViewController {
     
     private func setConstraints() {
         let viewHeight = self.view.frame.height
-        let priorityStackWidth = self.view.frame.width - 20
+        let priorityStackWidth = (self.view.frame.width - 20) * 2/3
         let priorityStackHeight = priorityStackWidth/4
 
         self.priorityStackView.snp.makeConstraints {
-            $0.left.equalToSuperview().offset(10)
-            $0.right.equalToSuperview().inset(10)
             $0.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(10)
+            $0.centerX.equalToSuperview()
             $0.height.equalTo(priorityStackHeight)
+            $0.width.equalTo(priorityStackWidth)
         }
         
         self.redPriorityButton.snp.makeConstraints {
@@ -137,8 +132,8 @@ final class TaskAddingViewController: UIViewController {
         }
         
         self.titleTextField.snp.makeConstraints {
-            $0.left.equalTo(self.priorityStackView.snp.left)
-            $0.right.equalTo(self.priorityStackView.snp.right)
+            $0.left.equalToSuperview().offset(10)
+            $0.right.equalToSuperview().inset(10)
             $0.top.equalTo(self.priorityStackView.snp.bottom).offset(viewHeight/20)
             $0.height.equalTo(50)
         }
@@ -161,10 +156,11 @@ final class TaskAddingViewController: UIViewController {
     // MARK: - Active priority buttons updater
     
     private func priorityButtonsStatusCleanerUpdater(_ button: UIButton) {
-        self.redPriorityButton.backgroundColor = .red
-        self.blackPriorityButton.backgroundColor = .black
-        self.bluePriorityButton.backgroundColor = .blue
-        self.greenPriorityButton.backgroundColor = .green
+        self.redPriorityButton.backgroundColor = .lightGray
+        self.blackPriorityButton.backgroundColor = .lightGray
+        self.bluePriorityButton.backgroundColor = .lightGray
+        self.greenPriorityButton.backgroundColor = .lightGray
+        self.priorityLevel = ""
         
         switch button {
         case self.redPriorityButton:
@@ -205,6 +201,16 @@ final class TaskAddingViewController: UIViewController {
         default: return false
         }
     }
+    
+    // MARK: - Blank data checkers
+    
+    private func checkForBlankTitle() -> Bool {
+        self.titleTextField.text == ""
+    }
+    
+    private func checkForBlankPriority() -> Bool {
+        self.priorityLevel == ""
+    }
 }
 
 // MARK: - IBActions
@@ -216,8 +222,9 @@ extension TaskAddingViewController {
         switch self.isButtonActivated(self.redPriorityButton) {
         case true:
             self.redPriorityButton.backgroundColor = .darkGray
+            self.priorityLevel = PriorityImagesNames.red.rawValue
         case false:
-            self.redPriorityButton.backgroundColor = .red
+            break
         }
     }
     
@@ -227,8 +234,9 @@ extension TaskAddingViewController {
         switch self.isButtonActivated(self.blackPriorityButton) {
         case true:
             self.blackPriorityButton.backgroundColor = .darkGray
+            self.priorityLevel = PriorityImagesNames.black.rawValue
         case false:
-            self.blackPriorityButton.backgroundColor = .black
+            break
         }
     }
     
@@ -238,8 +246,9 @@ extension TaskAddingViewController {
         switch self.isButtonActivated(self.bluePriorityButton) {
         case true:
             self.bluePriorityButton.backgroundColor = .darkGray
+            self.priorityLevel = PriorityImagesNames.blue.rawValue
         case false:
-            self.bluePriorityButton.backgroundColor = .blue
+            break
         }
     }
     
@@ -249,18 +258,27 @@ extension TaskAddingViewController {
         switch self.isButtonActivated(self.greenPriorityButton) {
         case true:
             self.greenPriorityButton.backgroundColor = .darkGray
+            self.priorityLevel = PriorityImagesNames.green.rawValue
         case false:
-            self.greenPriorityButton.backgroundColor = .green
+            break
         }
     }
     
     @objc private func doneButtonTapped() {
-        if self.titleTextField.text == "" {
-            self.alertMessage("Please enter task title")
-        } else {
-            self.newTaskCreating(priority: "red_flag", title: self.titleTextField.text ?? "", description: self.decriptionTextField.text ?? "")
-            print("doneButtonTapped")
-            dump(self.newTask)
+        switch self.checkForBlankPriority() {
+        case true:
+            self.alertMessage("Please choose task priority flag")
+        case false:
+            break
         }
+        
+        switch self.checkForBlankTitle() {
+        case true:
+            self.alertMessage("Please enter task title")
+        case false:
+            self.newTaskCreating(priority: self.priorityLevel, title: self.titleTextField.text ?? "No title", description: self.decriptionTextField.text ?? "No description ...")
+            self.closure?(self.newTask)
+            self.navigationController?.popViewController(animated: true)
+        }        
     }
 }
