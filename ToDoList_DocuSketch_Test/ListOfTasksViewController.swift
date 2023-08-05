@@ -10,6 +10,22 @@ import SnapKit
 
 final class ListOfTasksViewController: UIViewController {
     
+    // MARK: - Parameters
+    
+    private var unfinishedTasksData: [TaskModel] = [] {
+        didSet {
+            print(self.unfinishedTasksData)
+        }
+    }
+    
+    private var finishedTasksData: [TaskModel] = [] {
+        didSet {
+            print(self.unfinishedTasksData)
+        }
+    }
+    
+    private var displayData: [[TaskModel]] = [[]]
+    
     // MARK: - GUI
     
     private lazy var listofTasksTableView: UITableView = {
@@ -36,9 +52,13 @@ final class ListOfTasksViewController: UIViewController {
         self.listofTasksTableView.register(ListOfTasksTableViewCell.self, forCellReuseIdentifier: "list_cell")
     }
     
+    // MARK: - Add subviews
+    
     private func addSubviews() {
         self.view.addSubview(self.listofTasksTableView)
     }
+    
+    // MARK: - Set constraints
     
     private func setConstraints() {
         self.listofTasksTableView.snp.makeConstraints {
