@@ -87,7 +87,8 @@ extension ListOfTasksViewController: UITableViewDelegate, UITableViewDataSource 
 
 extension ListOfTasksViewController {
     @objc private func addNewtaskTapped() {
-        print("addNewtaskTapped")
+        let vc = TaskAddingViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 
