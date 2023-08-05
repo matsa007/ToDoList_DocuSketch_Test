@@ -26,11 +26,13 @@ final class ListOfTasksViewController: UIViewController {
     
     private var displayData: [[TaskModel]] = [[]]
     
+    var dataa = ["1","2","3"]
+    
     // MARK: - GUI
     
     private lazy var listofTasksTableView: UITableView = {
         let tableView = UITableView()
-        tableView.backgroundColor = .green
+        tableView.backgroundColor = .white
         return tableView
     }()
     
@@ -62,7 +64,7 @@ final class ListOfTasksViewController: UIViewController {
     
     private func setConstraints() {
         self.listofTasksTableView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.edges.equalToSuperview().inset(10)
         }
     }
 }
@@ -71,11 +73,12 @@ final class ListOfTasksViewController: UIViewController {
 
 extension ListOfTasksViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        1
+        self.dataa.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "list_cell", for: indexPath) as? ListOfTasksTableViewCell else { return UITableViewCell() }
+        cell.setCellView(title: self.dataa[indexPath.row])
         return cell
     }
 }
