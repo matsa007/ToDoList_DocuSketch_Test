@@ -157,25 +157,101 @@ final class TaskAddingViewController: UIViewController {
         let newTask: TaskModel = TaskModel(taskTitle: title, taskDescription: description, priorityLevel: priority)
         self.newTask = newTask
     }
+    
+    // MARK: - Active priority buttons updater
+    
+    private func priorityButtonsStatusCleanerUpdater(_ button: UIButton) {
+        self.redPriorityButton.backgroundColor = .red
+        self.blackPriorityButton.backgroundColor = .black
+        self.bluePriorityButton.backgroundColor = .blue
+        self.greenPriorityButton.backgroundColor = .green
+        
+        switch button {
+        case self.redPriorityButton:
+            self.redPriorityButton.tag += 1
+            self.blackPriorityButton.tag = 1
+            self.bluePriorityButton.tag = 1
+            self.greenPriorityButton.tag = 1
+            
+        case self.blackPriorityButton:
+            self.redPriorityButton.tag = 1
+            self.blackPriorityButton.tag += 1
+            self.bluePriorityButton.tag = 1
+            self.greenPriorityButton.tag = 1
+            
+        case self.bluePriorityButton:
+            self.redPriorityButton.tag = 1
+            self.blackPriorityButton.tag = 1
+            self.bluePriorityButton.tag += 1
+            self.greenPriorityButton.tag = 1
+            
+        case self.greenPriorityButton:
+            self.redPriorityButton.tag = 1
+            self.blackPriorityButton.tag = 1
+            self.bluePriorityButton.tag = 1
+            self.greenPriorityButton.tag += 1
+        default:
+            break
+        }
+    }
+    
+    // MARK: - Button tag checker
+    
+    private func isButtonActivated(_ button: UIButton) -> Bool {
+        let tag = button.tag
+        
+        switch tag % 2 {
+        case 0: return true
+        default: return false
+        }
+    }
 }
 
 // MARK: - IBActions
 
 extension TaskAddingViewController {
     @objc private func redPriorityButtonTapped() {
-        print("redPriorityButtonTapped")
+        self.priorityButtonsStatusCleanerUpdater(self.redPriorityButton)
+        
+        switch self.isButtonActivated(self.redPriorityButton) {
+        case true:
+            self.redPriorityButton.backgroundColor = .darkGray
+        case false:
+            self.redPriorityButton.backgroundColor = .red
+        }
     }
     
     @objc private func blackPriorityButtonTapped() {
-        print("blackPriorityButtonTapped")
+        self.priorityButtonsStatusCleanerUpdater(self.blackPriorityButton)
+        
+        switch self.isButtonActivated(self.blackPriorityButton) {
+        case true:
+            self.blackPriorityButton.backgroundColor = .darkGray
+        case false:
+            self.blackPriorityButton.backgroundColor = .black
+        }
     }
     
     @objc private func bluePriorityButtonTapped() {
-        print("bluePriorityButtonTapped")
+        self.priorityButtonsStatusCleanerUpdater(self.bluePriorityButton)
+        
+        switch self.isButtonActivated(self.bluePriorityButton) {
+        case true:
+            self.bluePriorityButton.backgroundColor = .darkGray
+        case false:
+            self.bluePriorityButton.backgroundColor = .blue
+        }
     }
     
     @objc private func greenPriorityButtonTapped() {
-        print("greenPriorityButtonTapped")
+        self.priorityButtonsStatusCleanerUpdater(self.greenPriorityButton)
+        
+        switch self.isButtonActivated(self.greenPriorityButton) {
+        case true:
+            self.greenPriorityButton.backgroundColor = .darkGray
+        case false:
+            self.greenPriorityButton.backgroundColor = .green
+        }
     }
     
     @objc private func doneButtonTapped() {
