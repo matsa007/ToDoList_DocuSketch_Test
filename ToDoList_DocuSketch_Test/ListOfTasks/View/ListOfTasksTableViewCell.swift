@@ -9,9 +9,13 @@ import UIKit
 
 final class ListOfTasksTableViewCell: UITableViewCell {
     
+    // MARK: - Parameters
+    
+    var closure: ((Int) -> ())?
+    
     // MARK: - GUI
     
-    private lazy var taskStatusButton: UIButton = {
+    lazy var taskStatusButton: UIButton = {
         let button = UIButton(type: .custom)
         button.backgroundColor = .red
         button.addTarget(self, action: #selector(self.taskStatusButtontapped), for: .touchUpInside)
@@ -80,8 +84,9 @@ final class ListOfTasksTableViewCell: UITableViewCell {
     
     // MARK: - Set cell view
     
-    func setCellView(title: String) {
+    func setCellView(title: String, priority: String) {
         self.taskTitleLabel.text = title
+        self.priorityImageView.image = UIImage(named: priority)
     }
 }
 
@@ -90,5 +95,7 @@ final class ListOfTasksTableViewCell: UITableViewCell {
 extension ListOfTasksTableViewCell {
     @objc private func taskStatusButtontapped() {
         print("taskStatusButtontapped")
+        print("# = \(self.taskStatusButton.tag)")
+        self.closure?(self.taskStatusButton.tag)
     }
 }
