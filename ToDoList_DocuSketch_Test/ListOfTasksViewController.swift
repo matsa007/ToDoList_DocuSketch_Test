@@ -24,6 +24,7 @@ final class ListOfTasksViewController: UIViewController {
         super.viewDidLoad()
         
         self.view.backgroundColor = .lightGray
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.addNewtaskTapped))
         self.setTableView()
         self.addSubviews()
         self.setConstraints()
@@ -46,6 +47,8 @@ final class ListOfTasksViewController: UIViewController {
     }
 }
 
+// MARK: - Extensions
+
 extension ListOfTasksViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         1
@@ -54,6 +57,14 @@ extension ListOfTasksViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "list_cell", for: indexPath) as? ListOfTasksTableViewCell else { return UITableViewCell() }
         return cell
+    }
+}
+
+// MARK: - IBActions
+
+extension ListOfTasksViewController {
+    @objc private func addNewtaskTapped() {
+        print("addNewtaskTapped")
     }
 }
 
