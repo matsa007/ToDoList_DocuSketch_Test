@@ -136,12 +136,4 @@ extension TaskInfoViewController {
             self.navigationController?.popViewController(animated: true)
         }
     }
-    
-    @objc private func deleteButtonTapped() {
-        print("deleteButtonTapped")
-    }
-    
-    @objc private func doneButtonTapped() {
-        print("doneButtonTapped")
-    }
 }

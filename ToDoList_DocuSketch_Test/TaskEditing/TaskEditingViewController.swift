@@ -30,7 +30,6 @@ class TaskEditingViewController: TaskAddingViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view.backgroundColor = .green
         self.titleTextField.text = self.task.taskTitle
         self.decriptionTextField.text = self.task.taskDescription
         
@@ -47,11 +46,9 @@ class TaskEditingViewController: TaskAddingViewController {
 
 extension TaskEditingViewController {
     override func doneButtonTapped() {
-        print("TaskEditingViewController_doneButtonTapped")
         guard let title = self.titleTextField.text else { return }
         self.task = TaskModel(taskTitle: title, taskDescription: self.decriptionTextField.text, priorityLevel: self.priorityLevel)
         self.completion?(self.task)
-        dump(self.task)
         super.doneButtonTapped()
     }
     

@@ -20,13 +20,12 @@ class TaskAddingViewController: UIViewController {
     private lazy var priorityStackView: UIStackView = {
         let view = UIStackView()
         view.axis = .horizontal
-        view.backgroundColor = .lightGray
         return view
     }()
     
     private lazy var redPriorityButton: UIButton = {
         let button = UIButton(type: .custom)
-        button.addTarget(self, action: #selector(self.redPriorityButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(self.priorityButtonTapped(sender: )), for: .touchUpInside)
         button.tag = 1
         button.setImage(UIImage(named: PriorityImagesNames.red.rawValue), for: .normal)
         return button
@@ -34,7 +33,7 @@ class TaskAddingViewController: UIViewController {
     
     private lazy var blackPriorityButton: UIButton = {
         let button = UIButton(type: .custom)
-        button.addTarget(self, action: #selector(self.blackPriorityButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(self.priorityButtonTapped(sender: )), for: .touchUpInside)
         button.tag = 1
         button.setImage(UIImage(named: PriorityImagesNames.black.rawValue), for: .normal)
         return button
@@ -42,7 +41,7 @@ class TaskAddingViewController: UIViewController {
     
     private lazy var bluePriorityButton: UIButton = {
         let button = UIButton(type: .custom)
-        button.addTarget(self, action: #selector(self.bluePriorityButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(self.priorityButtonTapped(sender: )), for: .touchUpInside)
         button.tag = 1
         button.setImage(UIImage(named: PriorityImagesNames.blue.rawValue), for: .normal)
         return button
@@ -50,7 +49,7 @@ class TaskAddingViewController: UIViewController {
     
     private lazy var greenPriorityButton: UIButton = {
         let button = UIButton(type: .custom)
-        button.addTarget(self, action: #selector(self.greenPriorityButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(self.priorityButtonTapped(sender: )), for: .touchUpInside)
         button.tag = 1
         button.setImage(UIImage(named: PriorityImagesNames.green.rawValue), for: .normal)
         return button
@@ -59,14 +58,14 @@ class TaskAddingViewController: UIViewController {
     lazy var titleTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Type your task title here ..."
-        textField.backgroundColor = .white
+        textField.backgroundColor = .lightGray
         return textField
         
     }()
     
     lazy var decriptionTextField: UITextField = {
         let textField = UITextField()
-        textField.backgroundColor = .white
+        textField.backgroundColor = .lightGray
         textField.placeholder = "Type your task decription here ..."
         return textField
     }()
@@ -76,7 +75,7 @@ class TaskAddingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = .lightGray
+        self.view.backgroundColor = .white
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done,
                                                                  target: self,
                                                                  action: #selector(self.doneButtonTapped))
@@ -191,10 +190,10 @@ class TaskAddingViewController: UIViewController {
     }
     
     private func priorityButtonsStatusCleaner() {
-        self.redPriorityButton.backgroundColor = .lightGray
-        self.blackPriorityButton.backgroundColor = .lightGray
-        self.bluePriorityButton.backgroundColor = .lightGray
-        self.greenPriorityButton.backgroundColor = .lightGray
+        self.redPriorityButton.backgroundColor = .clear
+        self.blackPriorityButton.backgroundColor = .clear
+        self.bluePriorityButton.backgroundColor = .clear
+        self.greenPriorityButton.backgroundColor = .clear
         self.priorityLevel = ""
     }
     
@@ -220,57 +219,41 @@ class TaskAddingViewController: UIViewController {
     private func checkForBlankPriority() -> Bool {
         self.priorityLevel == ""
     }
+    
+    // MARK: - Priority level updater
+    
+    private func priorityLevelUpdater(_ button: UIButton) {
+        self.priorityButtonsStatusUpdater(button)
+        switch self.isButtonActivated(button) {
+        case true:
+            button.backgroundColor = .lightGray
+            self.priorityLevel = self.priorityNameFinder(button)
+        case false:
+            break
+        }
+    }
+    
+    private func priorityNameFinder(_ button: UIButton) -> String {
+        switch button {
+        case self.redPriorityButton:
+            return PriorityImagesNames.red.rawValue
+        case self.blackPriorityButton:
+            return PriorityImagesNames.black.rawValue
+        case self.bluePriorityButton:
+            return PriorityImagesNames.blue.rawValue
+        case self.greenPriorityButton:
+            return PriorityImagesNames.green.rawValue
+        default:
+            return ""
+        }
+    }
 }
 
 // MARK: - IBActions
 
 extension TaskAddingViewController {
-    @objc private func redPriorityButtonTapped() {
-        self.priorityButtonsStatusUpdater(self.redPriorityButton)
-        
-        switch self.isButtonActivated(self.redPriorityButton) {
-        case true:
-            self.redPriorityButton.backgroundColor = .darkGray
-            self.priorityLevel = PriorityImagesNames.red.rawValue
-        case false:
-            break
-        }
-    }
-    
-    @objc private func blackPriorityButtonTapped() {
-        self.priorityButtonsStatusUpdater(self.blackPriorityButton)
-        
-        switch self.isButtonActivated(self.blackPriorityButton) {
-        case true:
-            self.blackPriorityButton.backgroundColor = .darkGray
-            self.priorityLevel = PriorityImagesNames.black.rawValue
-        case false:
-            break
-        }
-    }
-    
-    @objc private func bluePriorityButtonTapped() {
-        self.priorityButtonsStatusUpdater(self.bluePriorityButton)
-        
-        switch self.isButtonActivated(self.bluePriorityButton) {
-        case true:
-            self.bluePriorityButton.backgroundColor = .darkGray
-            self.priorityLevel = PriorityImagesNames.blue.rawValue
-        case false:
-            break
-        }
-    }
-    
-    @objc private func greenPriorityButtonTapped() {
-        self.priorityButtonsStatusUpdater(self.greenPriorityButton)
-        
-        switch self.isButtonActivated(self.greenPriorityButton) {
-        case true:
-            self.greenPriorityButton.backgroundColor = .darkGray
-            self.priorityLevel = PriorityImagesNames.green.rawValue
-        case false:
-            break
-        }
+    @objc private func priorityButtonTapped(sender: UIButton) {
+        self.priorityLevelUpdater(sender)
     }
     
     @objc func doneButtonTapped() {

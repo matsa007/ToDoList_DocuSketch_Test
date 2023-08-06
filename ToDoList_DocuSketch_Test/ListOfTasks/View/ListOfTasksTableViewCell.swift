@@ -100,8 +100,6 @@ final class ListOfTasksTableViewCell: UITableViewCell {
 
 extension ListOfTasksTableViewCell {
     @objc private func taskStatusButtontapped() {
-        print("taskStatusButtontapped")
-        print("# = \(self.taskStatusButton.tag)")
         self.closure?(self.taskStatusButton.tag)
     }
 }

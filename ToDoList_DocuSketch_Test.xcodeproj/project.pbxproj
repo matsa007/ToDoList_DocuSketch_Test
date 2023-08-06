@@ -82,6 +82,8 @@
 				49B5C2442A7E916700F9D6FF /* ListOfTasks */,
 				49B5C2482A7ECBC300F9D6FF /* TaskInfo */,
 				49B5C2472A7E91DD00F9D6FF /* TaskAdding */,
+				49B5C24F2A7FD4AA00F9D6FF /* TaskEditing */,
+				49B5C2502A7FD4C500F9D6FF /* Services */,
 				49B5C2452A7E91B300F9D6FF /* Models */,
 				49B5C22D2A7E477600F9D6FF /* Assets.xcassets */,
 				49B5C2322A7E477600F9D6FF /* Info.plist */,
@@ -135,7 +137,6 @@
 			isa = PBXGroup;
 			children = (
 				49B5C23C2A7E5A0900F9D6FF /* TaskAddingViewController.swift */,
-				49B5C24B2A7FB42E00F9D6FF /* TaskEditingViewController.swift */,
 			);
 			path = TaskAdding;
 			sourceTree = "<group>";
@@ -146,6 +147,21 @@
 				49B5C2492A7ECBE800F9D6FF /* TaskInfoViewController.swift */,
 			);
 			path = TaskInfo;
+			sourceTree = "<group>";
+		};
+		49B5C24F2A7FD4AA00F9D6FF /* TaskEditing */ = {
+			isa = PBXGroup;
+			children = (
+				49B5C24B2A7FB42E00F9D6FF /* TaskEditingViewController.swift */,
+			);
+			path = TaskEditing;
+			sourceTree = "<group>";
+		};
+		49B5C2502A7FD4C500F9D6FF /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		603ADE928A43AC9341B78EC6 /* Frameworks */ = {
