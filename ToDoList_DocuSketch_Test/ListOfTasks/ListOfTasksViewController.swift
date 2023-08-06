@@ -56,14 +56,24 @@ final class ListOfTasksViewController: UIViewController {
         super.viewDidLoad()
         
         self.displayDataCreating()
+        self.setView()
+        self.addSubviews()
+        self.setConstraints()
+    }
+    
+    // MARK: - Set view
+    
+    private func setView() {
+        self.setNavigationBar()
+        self.setTableView()
+    }
+    
+    private func setNavigationBar() {
         self.view.backgroundColor = .white
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
                                                                  target: self,
                                                                  action: #selector(self.addNewtaskTapped))
         self.navigationItem.title = "ToDo List"
-        self.setTableView()
-        self.addSubviews()
-        self.setConstraints()
     }
     
     private func setTableView() {
@@ -71,26 +81,6 @@ final class ListOfTasksViewController: UIViewController {
         self.listofTasksTableView.dataSource = self
         self.listofTasksTableView.register(ListOfTasksTableViewCell.self, forCellReuseIdentifier: "list_cell")
     }
-    
-    // MARK: - Save and read from UserDefaults
-    
-//    private func saveToUserDefaults(_ taskData: [TaskModel], key: String) {
-//        let encoder = JSONEncoder()
-//        if let data = try? encoder.encode(taskData) {
-//            UserDefaults.standard.set(data, forKey: key)
-//        }
-//        self.displayDataCreating()
-//    }
-//    
-//    private func readFromUserDefaults(key: String) -> [TaskModel] {
-//        if let data = UserDefaults.standard.data(forKey: key) {
-//            let decoder = JSONDecoder()
-//            if let tasks = try? decoder.decode([TaskModel].self, from: data) {
-//                return tasks
-//            }
-//        }
-//        return []
-//    }
     
     // MARK: - Add subviews
     
@@ -109,17 +99,9 @@ final class ListOfTasksViewController: UIViewController {
     // MARK: - Display data creating
     
     private func displayDataCreating() {
-        self.displayData.removeAll()
-        
-        if self.unfinishedTasksData.count > 0 {
-            self.displayData.append(self.unfinishedTasksData)
-        }
-                
-        if self.finishedTasksData.count > 0 {
-            self.displayData.append(self.finishedTasksData)
-        }
-        
-        self.listofTasksTableView.reloadData()
+        let displayDataCreationService = DisplayDataCreator()
+        self.displayData = displayDataCreationService.displayDataCreating(unfinishedTasksData: self.unfinishedTasksData,
+                                                                          finishedTasksData: self.finishedTasksData)
     }
     
     private func finishedTasksUpdater(section: Int, index: Int) {
