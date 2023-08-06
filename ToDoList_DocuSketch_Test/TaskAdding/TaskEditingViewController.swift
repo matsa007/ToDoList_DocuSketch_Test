@@ -9,8 +9,9 @@ import UIKit
 
 class TaskEditingViewController: TaskAddingViewController {
     
-    private let task: TaskModel
+    private var task: TaskModel
     var completion: ((TaskModel) -> ())?
+    var closureVoid: (() -> ())?
     
     // MARK: - Initialization
         
@@ -32,5 +33,30 @@ class TaskEditingViewController: TaskAddingViewController {
         self.view.backgroundColor = .green
         self.titleTextField.text = self.task.taskTitle
         self.decriptionTextField.text = self.task.taskDescription
+        
+        self.navigationItem.rightBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .done,
+                                                                   target: self,
+                                                                   action: #selector(self.doneButtonTapped)),
+                                                   UIBarButtonItem(barButtonSystemItem: .trash,
+                                                                   target: self,
+                                                                   action: #selector(self.deleteButtontapped))]
+    }
+}
+
+// MARK: - IBActions
+
+extension TaskEditingViewController {
+    override func doneButtonTapped() {
+        print("TaskEditingViewController_doneButtonTapped")
+        guard let title = self.titleTextField.text else { return }
+        self.task = TaskModel(taskTitle: title, taskDescription: self.decriptionTextField.text, priorityLevel: self.priorityLevel)
+        self.completion?(self.task)
+        dump(self.task)
+        super.doneButtonTapped()
+    }
+    
+    @objc private func deleteButtontapped() {
+        self.navigationController?.popViewController(animated: false)
+        self.closureVoid?()
     }
 }

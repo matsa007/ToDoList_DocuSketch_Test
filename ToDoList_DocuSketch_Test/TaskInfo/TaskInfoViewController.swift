@@ -11,7 +11,9 @@ final class TaskInfoViewController: UIViewController {
     
     // MARK: - Parameters
     
-    private let task: TaskModel
+    private var task: TaskModel
+    private let position: TaskPosition
+    var closure: ((TaskModel, TaskPosition) -> ())?
     
     // MARK: - GUI
     
@@ -32,8 +34,9 @@ final class TaskInfoViewController: UIViewController {
     
     // MARK: - Initialization
         
-    init(task: TaskModel) {
+    init(task: TaskModel, position: TaskPosition) {
         self.task = task
+        self.position = position
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -67,7 +70,6 @@ final class TaskInfoViewController: UIViewController {
     // MARK: - Set constraints
     
     private func setConstraints() {
-        let viewHeight = self.view.frame.height
         let titleWidth = (self.view.frame.width - 20) * 2/3
         let titleHeight = titleWidth/4
 
@@ -87,10 +89,6 @@ final class TaskInfoViewController: UIViewController {
             $0.top.equalTo(self.priorityImageView.snp.bottom).offset(10)
             $0.width.equalTo(self.titlelabel.snp.width)
         }
-        
-        
-        
-        
     }
     
     private func setView() {
@@ -120,12 +118,23 @@ extension TaskInfoViewController {
     @objc private func editButtonTapped() {
         let vc = TaskEditingViewController(task: self.task)
         self.navigationController?.pushViewController(vc, animated: true)
-        self.navigationItem.rightBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .done,
-                                                                   target: self,
-                                                                   action: #selector(self.doneButtonTapped)),
-                                                   UIBarButtonItem(barButtonSystemItem: .trash,
-                                                                   target: self,
-                                                                   action: #selector(self.deleteButtonTapped))]
+        
+        vc.completion = { [weak self] task in
+            guard let self else { return }
+            self.task = task
+            self.titlelabel.text = self.task.taskTitle
+            self.descriptionlabel.text = self.task.taskDescription
+            guard let imageName = self.task.priorityLevel else { return }
+            self.priorityImageView.image = UIImage(named: imageName)
+            self.closure?(self.task, self.position)
+        }
+        
+        vc.closureVoid = { [weak self] in
+            guard let self else { return }
+            self.task = TaskModel(taskTitle: "", taskDescription: "", priorityLevel: "")
+            self.closure?(self.task, self.position)
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     @objc private func deleteButtonTapped() {

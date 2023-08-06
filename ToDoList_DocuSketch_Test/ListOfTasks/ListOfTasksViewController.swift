@@ -171,8 +171,33 @@ extension ListOfTasksViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = TaskInfoViewController(task: self.displayData[indexPath.section][indexPath.row])
+        let vc = TaskInfoViewController(task: self.displayData[indexPath.section][indexPath.row], position: TaskPosition(section: indexPath.section, index: indexPath.row))
         self.navigationController?.pushViewController(vc, animated: true)
+        let blankTitle = ""
+        
+        vc.closure = { [weak self] editedTask, position in
+            guard let self else { return }
+
+            if editedTask.taskTitle != blankTitle {
+                switch position.section {
+                case 0:
+                    self.unfinishedTasksData[position.index] = editedTask
+                case 1:
+                    self.finishedTasksData[position.index] = editedTask
+                default:
+                    break
+                }
+            } else {
+                switch position.section {
+                case 0:
+                    self.unfinishedTasksData.remove(at: position.index)
+                case 1:
+                    self.finishedTasksData.remove(at: position.index)
+                default:
+                    break
+                }
+            }
+        }
     }
 }
 

@@ -8,7 +8,7 @@
 import Foundation
 
 struct TaskModel {
-    var taskTitle: String
-    var taskDescription: String?
-    var priorityLevel: String?
+    let taskTitle: String
+    let taskDescription: String?
+    let priorityLevel: String?
 }

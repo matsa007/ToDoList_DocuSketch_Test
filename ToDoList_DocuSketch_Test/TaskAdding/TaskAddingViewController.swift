@@ -11,8 +11,8 @@ class TaskAddingViewController: UIViewController {
     
     // MARK: - Parameters
     
-    private var newTask = TaskModel(taskTitle: "")
-    private var priorityLevel: String = ""
+    private var newTask = TaskModel(taskTitle: "", taskDescription: "", priorityLevel: "")
+    var priorityLevel: String = ""
     var closure: ((TaskModel) -> ())?
     
     // MARK: - GUI
@@ -273,7 +273,7 @@ extension TaskAddingViewController {
         }
     }
     
-    @objc private func doneButtonTapped() {
+    @objc func doneButtonTapped() {
         switch self.checkForBlankTitle() {
         case true:
             self.alertMessage("Please enter task title")
