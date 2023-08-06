@@ -15,15 +15,10 @@ final class ListOfTasksViewController: UIViewController {
     private var unfinishedTasksData: [TaskModel] = [] {
         didSet {
             self.displayDataCreating()
-            self.listofTasksTableView.reloadData()
-
         }
     }
     
-    private var finishedTasksData: [TaskModel] = [] {
-        didSet {
-        }
-    }
+    private var finishedTasksData: [TaskModel] = []
     
     private var displayData = [[TaskModel]]() {
         didSet {
@@ -45,8 +40,11 @@ final class ListOfTasksViewController: UIViewController {
         super.viewDidLoad()
         
         self.displayDataCreating()
-        self.view.backgroundColor = .lightGray
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.addNewtaskTapped))
+        self.view.backgroundColor = .white
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
+                                                                 target: self,
+                                                                 action: #selector(self.addNewtaskTapped))
+        self.navigationItem.title = "ToDo List"
         self.setTableView()
         self.addSubviews()
         self.setConstraints()
@@ -101,7 +99,7 @@ final class ListOfTasksViewController: UIViewController {
     }
 }
 
-// MARK: - Extensions
+// MARK: - UITableViewDelegate, UITableViewDataSource
 
 extension ListOfTasksViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -113,7 +111,7 @@ extension ListOfTasksViewController: UITableViewDelegate, UITableViewDataSource 
         case 0:
             return "Unfinished tasks:"
         case 1:
-            return "Finished tasks"
+            return "Finished tasks:"
         default:
             return ""
         }
@@ -132,13 +130,19 @@ extension ListOfTasksViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "list_cell", for: indexPath) as? ListOfTasksTableViewCell else { return UITableViewCell() }
-        cell.setCellView(title: self.displayData[indexPath.section][indexPath.row].taskTitle, priority: self.displayData[indexPath.section][indexPath.row].priorityLevel ?? "")
         cell.taskStatusButton.tag = indexPath.row
         
         cell.closure = { [weak self] tag in
             guard let self else { return }
             self.finishedTasksUpdater(section: indexPath.section, index: tag)
         }
+        
+        if indexPath.section == 1 {
+            cell.taskTitleLabel.textColor = .lightGray
+        }
+        
+        cell.setCellView(title: self.displayData[indexPath.section][indexPath.row].taskTitle,
+                         priority: self.displayData[indexPath.section][indexPath.row].priorityLevel ?? "", section: indexPath.section)
         return cell
     }
 }

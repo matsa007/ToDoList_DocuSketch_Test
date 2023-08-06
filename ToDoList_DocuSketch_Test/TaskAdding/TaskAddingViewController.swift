@@ -77,7 +77,10 @@ final class TaskAddingViewController: UIViewController {
         super.viewDidLoad()
         
         self.view.backgroundColor = .lightGray
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.doneButtonTapped))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done,
+                                                                 target: self,
+                                                                 action: #selector(self.doneButtonTapped))
+        self.navigationItem.title = "Add new task"
         self.addSubviews()
         self.setConstraints()
     }
@@ -153,14 +156,10 @@ final class TaskAddingViewController: UIViewController {
         self.newTask = newTask
     }
     
-    // MARK: - Active priority buttons updater
+    // MARK: - Active priority buttons updater and cleaner
     
-    private func priorityButtonsStatusCleanerUpdater(_ button: UIButton) {
-        self.redPriorityButton.backgroundColor = .lightGray
-        self.blackPriorityButton.backgroundColor = .lightGray
-        self.bluePriorityButton.backgroundColor = .lightGray
-        self.greenPriorityButton.backgroundColor = .lightGray
-        self.priorityLevel = ""
+    private func priorityButtonsStatusUpdater(_ button: UIButton) {
+        self.priorityButtonsStatusCleaner()
         
         switch button {
         case self.redPriorityButton:
@@ -191,14 +190,24 @@ final class TaskAddingViewController: UIViewController {
         }
     }
     
+    private func priorityButtonsStatusCleaner() {
+        self.redPriorityButton.backgroundColor = .lightGray
+        self.blackPriorityButton.backgroundColor = .lightGray
+        self.bluePriorityButton.backgroundColor = .lightGray
+        self.greenPriorityButton.backgroundColor = .lightGray
+        self.priorityLevel = ""
+    }
+    
     // MARK: - Button tag checker
     
     private func isButtonActivated(_ button: UIButton) -> Bool {
         let tag = button.tag
         
         switch tag % 2 {
-        case 0: return true
-        default: return false
+        case 0:
+            return true
+        default:
+            return false
         }
     }
     
@@ -217,7 +226,7 @@ final class TaskAddingViewController: UIViewController {
 
 extension TaskAddingViewController {
     @objc private func redPriorityButtonTapped() {
-        self.priorityButtonsStatusCleanerUpdater(self.redPriorityButton)
+        self.priorityButtonsStatusUpdater(self.redPriorityButton)
         
         switch self.isButtonActivated(self.redPriorityButton) {
         case true:
@@ -229,7 +238,7 @@ extension TaskAddingViewController {
     }
     
     @objc private func blackPriorityButtonTapped() {
-        self.priorityButtonsStatusCleanerUpdater(self.blackPriorityButton)
+        self.priorityButtonsStatusUpdater(self.blackPriorityButton)
         
         switch self.isButtonActivated(self.blackPriorityButton) {
         case true:
@@ -241,7 +250,7 @@ extension TaskAddingViewController {
     }
     
     @objc private func bluePriorityButtonTapped() {
-        self.priorityButtonsStatusCleanerUpdater(self.bluePriorityButton)
+        self.priorityButtonsStatusUpdater(self.bluePriorityButton)
         
         switch self.isButtonActivated(self.bluePriorityButton) {
         case true:
@@ -253,7 +262,7 @@ extension TaskAddingViewController {
     }
     
     @objc private func greenPriorityButtonTapped() {
-        self.priorityButtonsStatusCleanerUpdater(self.greenPriorityButton)
+        self.priorityButtonsStatusUpdater(self.greenPriorityButton)
         
         switch self.isButtonActivated(self.greenPriorityButton) {
         case true:
@@ -265,18 +274,13 @@ extension TaskAddingViewController {
     }
     
     @objc private func doneButtonTapped() {
-        switch self.checkForBlankPriority() {
-        case true:
-            self.alertMessage("Please choose task priority flag")
-        case false:
-            break
-        }
-        
         switch self.checkForBlankTitle() {
         case true:
             self.alertMessage("Please enter task title")
         case false:
-            self.newTaskCreating(priority: self.priorityLevel, title: self.titleTextField.text ?? "No title", description: self.decriptionTextField.text ?? "No description ...")
+            self.newTaskCreating(priority: self.priorityLevel,
+                                 title: self.titleTextField.text ?? "No title",
+                                 description: self.decriptionTextField.text ?? "No description ...")
             self.closure?(self.newTask)
             self.navigationController?.popViewController(animated: true)
         }        

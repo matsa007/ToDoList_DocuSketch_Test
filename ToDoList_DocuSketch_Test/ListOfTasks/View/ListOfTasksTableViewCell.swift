@@ -22,15 +22,13 @@ final class ListOfTasksTableViewCell: UITableViewCell {
         return button
     }()
     
-    private lazy var taskTitleLabel: UILabel = {
+    lazy var taskTitleLabel: UILabel = {
         let label = UILabel()
-        label.backgroundColor = .green
         return label
     }()
     
     private lazy var priorityImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .blue
         return imageView
     }()
     
@@ -84,9 +82,18 @@ final class ListOfTasksTableViewCell: UITableViewCell {
     
     // MARK: - Set cell view
     
-    func setCellView(title: String, priority: String) {
+    func setCellView(title: String, priority: String, section: Int) {
         self.taskTitleLabel.text = title
         self.priorityImageView.image = UIImage(named: priority)
+        
+        switch section {
+        case 0:
+            self.taskStatusButton.setImage(UIImage(named: "unchecked_checkbox"), for: .normal)
+        case 1:
+            self.taskStatusButton.setImage(UIImage(named: "checked_checkbox"), for: .normal)
+        default:
+            break
+        }
     }
 }
 
