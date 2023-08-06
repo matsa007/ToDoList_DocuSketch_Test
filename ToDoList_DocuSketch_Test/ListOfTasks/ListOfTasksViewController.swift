@@ -16,22 +16,22 @@ final class ListOfTasksViewController: UIViewController {
     
     private var unfinishedTasksData: [TaskModel] {
         get {
-            self.userDefaultsService.readFromUserDefaults(key: "unfinishedTasksData")
+            self.userDefaultsService.readFromUserDefaults(key: UserDefaultsKeys.unfinised.rawValue)
         }
         
         set {
-            self.userDefaultsService.saveToUserDefaults(newValue, key: "unfinishedTasksData")
+            self.userDefaultsService.saveToUserDefaults(newValue, key: UserDefaultsKeys.unfinised.rawValue)
             self.displayDataCreating()
         }
     }
     
     private var finishedTasksData: [TaskModel] {
         get {
-            self.userDefaultsService.readFromUserDefaults(key: "finishedTasksData")
+            self.userDefaultsService.readFromUserDefaults(key: UserDefaultsKeys.finished.rawValue)
         }
         
         set {
-            self.userDefaultsService.saveToUserDefaults(newValue, key: "finishedTasksData")
+            self.userDefaultsService.saveToUserDefaults(newValue, key: UserDefaultsKeys.finished.rawValue)
             self.displayDataCreating()
         }
     }
@@ -46,7 +46,6 @@ final class ListOfTasksViewController: UIViewController {
     
     private lazy var listofTasksTableView: UITableView = {
         let tableView = UITableView()
-        tableView.backgroundColor = .white
         return tableView
     }()
     
@@ -64,22 +63,23 @@ final class ListOfTasksViewController: UIViewController {
     // MARK: - Set view
     
     private func setView() {
+        self.view.backgroundColor = .white
         self.setNavigationBar()
         self.setTableView()
     }
     
     private func setNavigationBar() {
-        self.view.backgroundColor = .white
+        self.navigationItem.title = NavigationTitles.list.rawValue
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
                                                                  target: self,
                                                                  action: #selector(self.addNewtaskTapped))
-        self.navigationItem.title = "ToDo List"
     }
     
     private func setTableView() {
         self.listofTasksTableView.delegate = self
         self.listofTasksTableView.dataSource = self
-        self.listofTasksTableView.register(ListOfTasksTableViewCell.self, forCellReuseIdentifier: "list_cell")
+        self.listofTasksTableView.backgroundColor = .white
+        self.listofTasksTableView.register(ListOfTasksTableViewCell.self, forCellReuseIdentifier: CellsNames.list.rawValue)
     }
     
     // MARK: - Add subviews
@@ -104,6 +104,8 @@ final class ListOfTasksViewController: UIViewController {
                                                                           finishedTasksData: self.finishedTasksData)
     }
     
+    // MARK: - Moving and marking tasks as finished
+    
     private func finishedTasksUpdater(section: Int, index: Int) {
         switch section {
         case 0:
@@ -115,7 +117,17 @@ final class ListOfTasksViewController: UIViewController {
         default:
             break
         }
-        self.displayDataCreating()
+    }
+    
+    private func finishedTasksPainter(_ section: Int, _ label: UILabel) {
+        switch section {
+        case 0:
+            label.textColor = .black
+        case 1:
+            label.textColor = .lightGray
+        default:
+            break
+        }
     }
 }
 
@@ -129,9 +141,9 @@ extension ListOfTasksViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0:
-            return "Unfinished tasks:"
+            return SectionsNames.first.rawValue
         case 1:
-            return "Finished tasks:"
+            return SectionsNames.second.rawValue
         default:
             return ""
         }
@@ -149,21 +161,14 @@ extension ListOfTasksViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "list_cell", for: indexPath) as? ListOfTasksTableViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CellsNames.list.rawValue, for: indexPath) as? ListOfTasksTableViewCell else { return UITableViewCell() }
+        
+        self.finishedTasksPainter(indexPath.section, cell.taskTitleLabel)
         cell.taskStatusButton.tag = indexPath.row
         
         cell.closure = { [weak self] tag in
             guard let self else { return }
             self.finishedTasksUpdater(section: indexPath.section, index: tag)
-        }
-        
-        switch indexPath.section {
-        case 0:
-            cell.taskTitleLabel.textColor = .black
-        case 1:
-            cell.taskTitleLabel.textColor = .lightGray
-        default:
-            break
         }
         
         cell.setCellView(title: self.displayData[indexPath.section][indexPath.row].taskTitle,
@@ -174,10 +179,20 @@ extension ListOfTasksViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            self.listofTasksTableView.beginUpdates()
-            self.unfinishedTasksData.remove(at: indexPath.row)
-            self.listofTasksTableView.deleteRows(at: [indexPath], with: .fade)
-            self.listofTasksTableView.endUpdates()
+            switch indexPath.section {
+            case 0:
+                self.listofTasksTableView.beginUpdates()
+                self.unfinishedTasksData.remove(at: indexPath.row)
+                self.listofTasksTableView.deleteRows(at: [indexPath], with: .fade)
+                self.listofTasksTableView.endUpdates()
+            case 1:
+                self.listofTasksTableView.beginUpdates()
+                self.finishedTasksData.remove(at: indexPath.row)
+                self.listofTasksTableView.deleteRows(at: [indexPath], with: .fade)
+                self.listofTasksTableView.endUpdates()
+            default:
+                break
+            }
         }
     }
     

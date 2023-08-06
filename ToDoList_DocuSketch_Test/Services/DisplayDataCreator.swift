@@ -20,6 +20,5 @@ struct DisplayDataCreator {
         }
         
         return updatedDisplayData
-//        self.listofTasksTableView.reloadData()
     }
 }

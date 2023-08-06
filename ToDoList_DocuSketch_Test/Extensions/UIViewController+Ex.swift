@@ -22,7 +22,7 @@ extension UIViewController {
     
     func deletingAlertMessage(_ message: String, _ function: @escaping (UIAlertAction) -> ()) {
         DispatchQueue.main.async {
-            let alert = UIAlertController(title: "Error",
+            let alert = UIAlertController(title: "Warning!",
                                           message: message,
                                           preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Cancel",

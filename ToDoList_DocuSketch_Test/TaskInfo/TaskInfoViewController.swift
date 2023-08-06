@@ -50,10 +50,6 @@ final class TaskInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = .white
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit,
-                                                                 target: self,
-                                                                 action: #selector(self.editButtonTapped))
         self.addSubviews()
         self.setView()
         self.setConstraints()
@@ -70,14 +66,14 @@ final class TaskInfoViewController: UIViewController {
     // MARK: - Set constraints
     
     private func setConstraints() {
-        let titleWidth = (self.view.frame.width - 20) * 2/3
-        let titleHeight = titleWidth/4
+        let descriptionWidth = (self.view.frame.width - 20)
+        let titleHeight = descriptionWidth/4
 
         self.titlelabel.snp.makeConstraints {
             $0.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(10)
             $0.centerX.equalToSuperview()
             $0.height.equalTo(titleHeight)
-            $0.width.equalTo(titleWidth)
+            $0.width.equalTo(descriptionWidth * 4/5)
         }
         
         self.priorityImageView.snp.makeConstraints {
@@ -87,21 +83,32 @@ final class TaskInfoViewController: UIViewController {
         
         self.descriptionlabel.snp.makeConstraints {
             $0.top.equalTo(self.priorityImageView.snp.bottom).offset(10)
-            $0.width.equalTo(self.titlelabel.snp.width)
+            $0.centerX.equalTo(self.titlelabel.snp.centerX)
+            $0.width.equalTo(descriptionWidth)
         }
     }
     
-    // MARK: - Set GUI parameters
+    // MARK: - Set view
     
     private func setView() {
+        self.view.backgroundColor = .white
+        self.setNavigationBar()
         self.setTitleLabel()
         self.setPriorityImage()
         self.setDescriptionLabel()
     }
     
+    private func setNavigationBar() {
+        self.navigationItem.title = NavigationTitles.info.rawValue
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit,
+                                                                 target: self,
+                                                                 action: #selector(self.editButtonTapped))
+    }
+    
     private func setTitleLabel() {
         self.titlelabel.text = self.task.taskTitle
         self.titlelabel.textAlignment = .center
+        self.titlelabel.font = UIFont(name: FontNames.bold.rawValue, size: FontSizes.bold.rawValue)
     }
     
     private func setPriorityImage() {
@@ -110,7 +117,10 @@ final class TaskInfoViewController: UIViewController {
     }
     
     private func setDescriptionLabel() {
-        self.descriptionlabel.text = self.task.taskDescription
+        self.descriptionlabel.text = "Task description:\n\n\(self.task.taskDescription ?? "")"
+        self.descriptionlabel.lineBreakMode = .byWordWrapping
+        self.descriptionlabel.numberOfLines = 0
+        self.descriptionlabel.font = UIFont(name: FontNames.regular.rawValue, size: FontSizes.regular.rawValue)
     }
 }
 

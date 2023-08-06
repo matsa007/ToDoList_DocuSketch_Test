@@ -7,7 +7,9 @@
 
 import UIKit
 
-class TaskEditingViewController: TaskAddingViewController {
+final class TaskEditingViewController: TaskAddingViewController {
+    
+    // MARK: - Parameters
     
     private var task: TaskModel
     var completion: ((TaskModel) -> ())?
@@ -25,14 +27,15 @@ class TaskEditingViewController: TaskAddingViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Lifecycle
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    // MARK: - Set view
+    
+    override func setTextFields() {
         self.titleTextField.text = self.task.taskTitle
         self.decriptionTextField.text = self.task.taskDescription
-        
-        self.navigationItem.title = "Edit task"
+    }
+    
+    override func setNavigationBar() {
+        self.navigationItem.title = NavigationTitles.editing.rawValue
         self.navigationItem.rightBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .done,
                                                                    target: self,
                                                                    action: #selector(self.doneButtonTapped)),
@@ -53,7 +56,7 @@ extension TaskEditingViewController {
     }
     
     @objc private func deleteButtontapped() {
-        self.deletingAlertMessage("Are you sure to delete this task?", self.closeVc)
+        self.deletingAlertMessage(AlertMessages.deleting.rawValue, self.closeVc)
     }
     
     private func closeVc(_: UIAlertAction) {

@@ -26,7 +26,7 @@ final class ListOfTasksTableViewCell: UITableViewCell {
         return label
     }()
     
-    lazy var priorityImageView: UIImageView = {
+    private lazy var priorityImageView: UIImageView = {
         let imageView = UIImageView()
         return imageView
     }()
@@ -88,9 +88,9 @@ final class ListOfTasksTableViewCell: UITableViewCell {
         
         switch section {
         case 0:
-            self.taskStatusButton.setImage(UIImage(named: "unchecked_checkbox"), for: .normal)
+            self.taskStatusButton.setImage(UIImage(named: CheckboxesNames.unfinished.rawValue), for: .normal)
         case 1:
-            self.taskStatusButton.setImage(UIImage(named: "checked_checkbox"), for: .normal)
+            self.taskStatusButton.setImage(UIImage(named: CheckboxesNames.finished.rawValue), for: .normal)
         default:
             break
         }

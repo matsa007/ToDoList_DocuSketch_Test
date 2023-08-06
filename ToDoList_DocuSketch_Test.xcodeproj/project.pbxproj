@@ -22,6 +22,14 @@
 		49B5C24E2A7FBE8F00F9D6FF /* TaskPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B5C24D2A7FBE8F00F9D6FF /* TaskPosition.swift */; };
 		49B5C2562A802CD300F9D6FF /* UserDefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B5C2552A802CD300F9D6FF /* UserDefaultsService.swift */; };
 		49B5C2582A80309800F9D6FF /* DisplayDataCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B5C2572A80309800F9D6FF /* DisplayDataCreator.swift */; };
+		49B5C25C2A804A9700F9D6FF /* SectionsNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B5C25B2A804A9700F9D6FF /* SectionsNames.swift */; };
+		49B5C25E2A804B1800F9D6FF /* CellsNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B5C25D2A804B1800F9D6FF /* CellsNames.swift */; };
+		49B5C2602A804B8E00F9D6FF /* NavigationTitles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B5C25F2A804B8E00F9D6FF /* NavigationTitles.swift */; };
+		49B5C2622A804D0C00F9D6FF /* AlertMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B5C2612A804D0C00F9D6FF /* AlertMessages.swift */; };
+		49B5C2642A804DB000F9D6FF /* PlaceholderText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B5C2632A804DB000F9D6FF /* PlaceholderText.swift */; };
+		49B5C2662A804EBB00F9D6FF /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B5C2652A804EBB00F9D6FF /* UserDefaultsKeys.swift */; };
+		49B5C2682A8050DF00F9D6FF /* CheckboxesNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B5C2672A8050DF00F9D6FF /* CheckboxesNames.swift */; };
+		49B5C26A2A805F5D00F9D6FF /* FontNamesAndSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B5C2692A805F5D00F9D6FF /* FontNamesAndSizes.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +50,14 @@
 		49B5C24D2A7FBE8F00F9D6FF /* TaskPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskPosition.swift; sourceTree = "<group>"; };
 		49B5C2552A802CD300F9D6FF /* UserDefaultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsService.swift; sourceTree = "<group>"; };
 		49B5C2572A80309800F9D6FF /* DisplayDataCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayDataCreator.swift; sourceTree = "<group>"; };
+		49B5C25B2A804A9700F9D6FF /* SectionsNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionsNames.swift; sourceTree = "<group>"; };
+		49B5C25D2A804B1800F9D6FF /* CellsNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellsNames.swift; sourceTree = "<group>"; };
+		49B5C25F2A804B8E00F9D6FF /* NavigationTitles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTitles.swift; sourceTree = "<group>"; };
+		49B5C2612A804D0C00F9D6FF /* AlertMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertMessages.swift; sourceTree = "<group>"; };
+		49B5C2632A804DB000F9D6FF /* PlaceholderText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderText.swift; sourceTree = "<group>"; };
+		49B5C2652A804EBB00F9D6FF /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
+		49B5C2672A8050DF00F9D6FF /* CheckboxesNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxesNames.swift; sourceTree = "<group>"; };
+		49B5C2692A805F5D00F9D6FF /* FontNamesAndSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontNamesAndSizes.swift; sourceTree = "<group>"; };
 		5CE83020B85DB3E27D7567B1 /* Pods-ToDoList_DocuSketch_Test.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToDoList_DocuSketch_Test.release.xcconfig"; path = "Target Support Files/Pods-ToDoList_DocuSketch_Test/Pods-ToDoList_DocuSketch_Test.release.xcconfig"; sourceTree = "<group>"; };
 		9B5361A52B443C96B8B72447 /* Pods-ToDoList_DocuSketch_Test.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToDoList_DocuSketch_Test.debug.xcconfig"; path = "Target Support Files/Pods-ToDoList_DocuSketch_Test/Pods-ToDoList_DocuSketch_Test.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -107,6 +123,14 @@
 			isa = PBXGroup;
 			children = (
 				49B5C2402A7E850B00F9D6FF /* PriorityImagesNames.swift */,
+				49B5C2672A8050DF00F9D6FF /* CheckboxesNames.swift */,
+				49B5C25B2A804A9700F9D6FF /* SectionsNames.swift */,
+				49B5C25D2A804B1800F9D6FF /* CellsNames.swift */,
+				49B5C25F2A804B8E00F9D6FF /* NavigationTitles.swift */,
+				49B5C2612A804D0C00F9D6FF /* AlertMessages.swift */,
+				49B5C2632A804DB000F9D6FF /* PlaceholderText.swift */,
+				49B5C2652A804EBB00F9D6FF /* UserDefaultsKeys.swift */,
+				49B5C2692A805F5D00F9D6FF /* FontNamesAndSizes.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -300,13 +324,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49B5C25C2A804A9700F9D6FF /* SectionsNames.swift in Sources */,
 				49B5C2562A802CD300F9D6FF /* UserDefaultsService.swift in Sources */,
 				49B5C23D2A7E5A0900F9D6FF /* TaskAddingViewController.swift in Sources */,
 				49B5C2292A7E477400F9D6FF /* ListOfTasksViewController.swift in Sources */,
+				49B5C2622A804D0C00F9D6FF /* AlertMessages.swift in Sources */,
+				49B5C26A2A805F5D00F9D6FF /* FontNamesAndSizes.swift in Sources */,
 				49B5C2252A7E477400F9D6FF /* AppDelegate.swift in Sources */,
+				49B5C2662A804EBB00F9D6FF /* UserDefaultsKeys.swift in Sources */,
 				49B5C23F2A7E700B00F9D6FF /* UIViewController+Ex.swift in Sources */,
+				49B5C2602A804B8E00F9D6FF /* NavigationTitles.swift in Sources */,
+				49B5C2642A804DB000F9D6FF /* PlaceholderText.swift in Sources */,
 				49B5C24A2A7ECBE800F9D6FF /* TaskInfoViewController.swift in Sources */,
+				49B5C2682A8050DF00F9D6FF /* CheckboxesNames.swift in Sources */,
 				49B5C2582A80309800F9D6FF /* DisplayDataCreator.swift in Sources */,
+				49B5C25E2A804B1800F9D6FF /* CellsNames.swift in Sources */,
 				49B5C23B2A7E50CA00F9D6FF /* TaskModel.swift in Sources */,
 				49B5C2272A7E477400F9D6FF /* SceneDelegate.swift in Sources */,
 				49B5C2392A7E4E0000F9D6FF /* ListOfTasksTableViewCell.swift in Sources */,
