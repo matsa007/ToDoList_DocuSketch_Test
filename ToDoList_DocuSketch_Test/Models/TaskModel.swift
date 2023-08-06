@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct TaskModel {
+struct TaskModel: Codable {
     let taskTitle: String
     let taskDescription: String?
     let priorityLevel: String?

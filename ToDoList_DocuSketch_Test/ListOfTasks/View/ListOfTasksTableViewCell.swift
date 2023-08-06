@@ -26,7 +26,7 @@ final class ListOfTasksTableViewCell: UITableViewCell {
         return label
     }()
     
-    private lazy var priorityImageView: UIImageView = {
+    lazy var priorityImageView: UIImageView = {
         let imageView = UIImageView()
         return imageView
     }()
@@ -39,7 +39,6 @@ final class ListOfTasksTableViewCell: UITableViewCell {
         self.taskStatusButton.imageView?.image = nil
         self.taskTitleLabel.text = nil
         self.priorityImageView.image = nil
-
     }
     
     override func layoutSubviews() {
@@ -60,16 +59,18 @@ final class ListOfTasksTableViewCell: UITableViewCell {
     // MARK: - Add constraints
     
     private func setConstraints() {
-        let cellWidth = self.contentView.frame.width
-
         self.taskStatusButton.snp.makeConstraints {
+            guard let imageWidth = self.taskStatusButton.imageView?.image?.size.width else { return }
+            
             $0.left.top.bottom.equalToSuperview()
-            $0.width.equalTo(cellWidth/12)
+            $0.width.equalTo(imageWidth)
         }
         
         self.priorityImageView.snp.makeConstraints {
+            guard let imageWidth = self.priorityImageView.image?.size.width  else { return }
+            
             $0.right.top.bottom.equalToSuperview()
-            $0.width.equalTo(cellWidth/12)
+            $0.width.equalTo(imageWidth)
         }
         
         self.taskTitleLabel.snp.makeConstraints {

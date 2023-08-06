@@ -29,10 +29,10 @@ class TaskEditingViewController: TaskAddingViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         self.titleTextField.text = self.task.taskTitle
         self.decriptionTextField.text = self.task.taskDescription
         
+        self.navigationItem.title = "Edit task"
         self.navigationItem.rightBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .done,
                                                                    target: self,
                                                                    action: #selector(self.doneButtonTapped)),
@@ -53,6 +53,10 @@ extension TaskEditingViewController {
     }
     
     @objc private func deleteButtontapped() {
+        self.deletingAlertMessage("Are you sure to delete this task?", self.closeVc)
+    }
+    
+    private func closeVc(_: UIAlertAction) {
         self.navigationController?.popViewController(animated: false)
         self.closureVoid?()
     }

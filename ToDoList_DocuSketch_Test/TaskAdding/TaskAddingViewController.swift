@@ -144,7 +144,7 @@ class TaskAddingViewController: UIViewController {
             $0.left.equalTo(self.titleTextField.snp.left)
             $0.right.equalTo(self.titleTextField.snp.right)
             $0.top.equalTo(self.titleTextField.snp.bottom).offset(viewHeight/20)
-            $0.height.equalTo(viewHeight/4)
+            $0.height.equalTo(viewHeight/6)
         }
     }
     

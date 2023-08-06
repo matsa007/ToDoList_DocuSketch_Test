@@ -12,19 +12,25 @@ final class ListOfTasksViewController: UIViewController {
     
     // MARK: - Parameters
     
-    private var unfinishedTasksData: [TaskModel] = [] {
-        didSet {
-            self.displayDataCreating()
-            self.listofTasksTableView.reloadData()
-
+    private let defaults = UserDefaults.standard
+    
+    private var unfinishedTasksData: [TaskModel] {
+        get {
+            self.readFromUserDefaults(key: "unfinishedTasksData")
+        }
+        
+        set {
+            self.saveToUserDefaults(newValue, key: "unfinishedTasksData")
         }
     }
     
-    private var finishedTasksData: [TaskModel] = [] {
-        didSet {
-            self.displayDataCreating()
-            self.listofTasksTableView.reloadData()
-
+    private var finishedTasksData: [TaskModel] {
+        get {
+            self.readFromUserDefaults(key: "finishedTasksData")
+        }
+        
+        set {
+            self.saveToUserDefaults(newValue, key: "finishedTasksData")
         }
     }
     
@@ -62,6 +68,26 @@ final class ListOfTasksViewController: UIViewController {
         self.listofTasksTableView.delegate = self
         self.listofTasksTableView.dataSource = self
         self.listofTasksTableView.register(ListOfTasksTableViewCell.self, forCellReuseIdentifier: "list_cell")
+    }
+    
+    // MARK: - Save and read from UserDefaults
+    
+    private func saveToUserDefaults(_ taskData: [TaskModel], key: String) {
+        let encoder = JSONEncoder()
+        if let data = try? encoder.encode(taskData) {
+            UserDefaults.standard.set(data, forKey: key)
+        }
+        self.displayDataCreating()
+    }
+    
+    private func readFromUserDefaults(key: String) -> [TaskModel] {
+        if let data = UserDefaults.standard.data(forKey: key) {
+            let decoder = JSONDecoder()
+            if let tasks = try? decoder.decode([TaskModel].self, from: data) {
+                return tasks
+            }
+        }
+        return []
     }
     
     // MARK: - Add subviews
@@ -155,9 +181,10 @@ extension ListOfTasksViewController: UITableViewDelegate, UITableViewDataSource 
         default:
             break
         }
-
+        
         cell.setCellView(title: self.displayData[indexPath.section][indexPath.row].taskTitle,
-                         priority: self.displayData[indexPath.section][indexPath.row].priorityLevel ?? "", section: indexPath.section)
+                         priority: self.displayData[indexPath.section][indexPath.row].priorityLevel ?? "",
+                         section: indexPath.section)
         return cell
     }
     

@@ -91,6 +91,8 @@ final class TaskInfoViewController: UIViewController {
         }
     }
     
+    // MARK: - Set GUI parameters
+    
     private func setView() {
         self.setTitleLabel()
         self.setPriorityImage()
@@ -121,16 +123,18 @@ extension TaskInfoViewController {
         
         vc.completion = { [weak self] task in
             guard let self else { return }
+            guard let imageName = self.task.priorityLevel else { return }
+
             self.task = task
             self.titlelabel.text = self.task.taskTitle
             self.descriptionlabel.text = self.task.taskDescription
-            guard let imageName = self.task.priorityLevel else { return }
             self.priorityImageView.image = UIImage(named: imageName)
             self.closure?(self.task, self.position)
         }
         
         vc.closureVoid = { [weak self] in
             guard let self else { return }
+            
             self.task = TaskModel(taskTitle: "", taskDescription: "", priorityLevel: "")
             self.closure?(self.task, self.position)
             self.navigationController?.popViewController(animated: true)
