@@ -12,25 +12,27 @@ final class ListOfTasksViewController: UIViewController {
     
     // MARK: - Parameters
     
-    private let defaults = UserDefaults.standard
+    private let userDefaultsService = UserDefaultsService()
     
     private var unfinishedTasksData: [TaskModel] {
         get {
-            self.readFromUserDefaults(key: "unfinishedTasksData")
+            self.userDefaultsService.readFromUserDefaults(key: "unfinishedTasksData")
         }
         
         set {
-            self.saveToUserDefaults(newValue, key: "unfinishedTasksData")
+            self.userDefaultsService.saveToUserDefaults(newValue, key: "unfinishedTasksData")
+            self.displayDataCreating()
         }
     }
     
     private var finishedTasksData: [TaskModel] {
         get {
-            self.readFromUserDefaults(key: "finishedTasksData")
+            self.userDefaultsService.readFromUserDefaults(key: "finishedTasksData")
         }
         
         set {
-            self.saveToUserDefaults(newValue, key: "finishedTasksData")
+            self.userDefaultsService.saveToUserDefaults(newValue, key: "finishedTasksData")
+            self.displayDataCreating()
         }
     }
     
@@ -72,23 +74,23 @@ final class ListOfTasksViewController: UIViewController {
     
     // MARK: - Save and read from UserDefaults
     
-    private func saveToUserDefaults(_ taskData: [TaskModel], key: String) {
-        let encoder = JSONEncoder()
-        if let data = try? encoder.encode(taskData) {
-            UserDefaults.standard.set(data, forKey: key)
-        }
-        self.displayDataCreating()
-    }
-    
-    private func readFromUserDefaults(key: String) -> [TaskModel] {
-        if let data = UserDefaults.standard.data(forKey: key) {
-            let decoder = JSONDecoder()
-            if let tasks = try? decoder.decode([TaskModel].self, from: data) {
-                return tasks
-            }
-        }
-        return []
-    }
+//    private func saveToUserDefaults(_ taskData: [TaskModel], key: String) {
+//        let encoder = JSONEncoder()
+//        if let data = try? encoder.encode(taskData) {
+//            UserDefaults.standard.set(data, forKey: key)
+//        }
+//        self.displayDataCreating()
+//    }
+//    
+//    private func readFromUserDefaults(key: String) -> [TaskModel] {
+//        if let data = UserDefaults.standard.data(forKey: key) {
+//            let decoder = JSONDecoder()
+//            if let tasks = try? decoder.decode([TaskModel].self, from: data) {
+//                return tasks
+//            }
+//        }
+//        return []
+//    }
     
     // MARK: - Add subviews
     
