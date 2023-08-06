@@ -15,10 +15,18 @@ final class ListOfTasksViewController: UIViewController {
     private var unfinishedTasksData: [TaskModel] = [] {
         didSet {
             self.displayDataCreating()
+            self.listofTasksTableView.reloadData()
+
         }
     }
     
-    private var finishedTasksData: [TaskModel] = []
+    private var finishedTasksData: [TaskModel] = [] {
+        didSet {
+            self.displayDataCreating()
+            self.listofTasksTableView.reloadData()
+
+        }
+    }
     
     private var displayData = [[TaskModel]]() {
         didSet {
@@ -82,6 +90,8 @@ final class ListOfTasksViewController: UIViewController {
         if self.finishedTasksData.count > 0 {
             self.displayData.append(self.finishedTasksData)
         }
+        
+        self.listofTasksTableView.reloadData()
     }
     
     private func finishedTasksUpdater(section: Int, index: Int) {
@@ -137,13 +147,32 @@ extension ListOfTasksViewController: UITableViewDelegate, UITableViewDataSource 
             self.finishedTasksUpdater(section: indexPath.section, index: tag)
         }
         
-        if indexPath.section == 1 {
+        switch indexPath.section {
+        case 0:
+            cell.taskTitleLabel.textColor = .black
+        case 1:
             cell.taskTitleLabel.textColor = .lightGray
+        default:
+            break
         }
-        
+
         cell.setCellView(title: self.displayData[indexPath.section][indexPath.row].taskTitle,
                          priority: self.displayData[indexPath.section][indexPath.row].priorityLevel ?? "", section: indexPath.section)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            self.listofTasksTableView.beginUpdates()
+            self.unfinishedTasksData.remove(at: indexPath.row)
+            self.listofTasksTableView.deleteRows(at: [indexPath], with: .fade)
+            self.listofTasksTableView.endUpdates()
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = TaskInfoViewController(task: self.displayData[indexPath.section][indexPath.row])
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 

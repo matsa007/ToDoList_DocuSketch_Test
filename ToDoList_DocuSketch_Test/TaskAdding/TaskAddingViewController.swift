@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class TaskAddingViewController: UIViewController {
+class TaskAddingViewController: UIViewController {
     
     // MARK: - Parameters
     
@@ -56,7 +56,7 @@ final class TaskAddingViewController: UIViewController {
         return button
     }()
     
-    private lazy var titleTextField: UITextField = {
+    lazy var titleTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Type your task title here ..."
         textField.backgroundColor = .white
@@ -64,7 +64,7 @@ final class TaskAddingViewController: UIViewController {
         
     }()
     
-    private lazy var decriptionTextField: UITextField = {
+    lazy var decriptionTextField: UITextField = {
         let textField = UITextField()
         textField.backgroundColor = .white
         textField.placeholder = "Type your task decription here ..."

@@ -17,7 +17,6 @@ final class ListOfTasksTableViewCell: UITableViewCell {
     
     lazy var taskStatusButton: UIButton = {
         let button = UIButton(type: .custom)
-        button.backgroundColor = .red
         button.addTarget(self, action: #selector(self.taskStatusButtontapped), for: .touchUpInside)
         return button
     }()
