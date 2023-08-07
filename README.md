@@ -6,7 +6,7 @@
 
 ## Todo List App Screenshots
 
-![Todo List App Screenshot](https://github.com/matsa007/ToDoList_DocuSketch_Test/blob/main/readme_screenshots/1.png)
+![Todo List App Screenshot](https://github.com/matsa007/ToDoList_DocuSketch_Test/blob/main/readme_screenshots/1.png) ![Todo List App Screenshot](https://github.com/matsa007/ToDoList_DocuSketch_Test/blob/main/readme_screenshots/1.png)
 
 
 ## Description
