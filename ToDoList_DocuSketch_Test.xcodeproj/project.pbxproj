@@ -30,6 +30,7 @@
 		49B5C2662A804EBB00F9D6FF /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B5C2652A804EBB00F9D6FF /* UserDefaultsKeys.swift */; };
 		49B5C2682A8050DF00F9D6FF /* CheckboxesNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B5C2672A8050DF00F9D6FF /* CheckboxesNames.swift */; };
 		49B5C26A2A805F5D00F9D6FF /* FontNamesAndSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B5C2692A805F5D00F9D6FF /* FontNamesAndSizes.swift */; };
+		49B5C26C2A8065A200F9D6FF /* String+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B5C26B2A8065A200F9D6FF /* String+Ex.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +59,7 @@
 		49B5C2652A804EBB00F9D6FF /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
 		49B5C2672A8050DF00F9D6FF /* CheckboxesNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxesNames.swift; sourceTree = "<group>"; };
 		49B5C2692A805F5D00F9D6FF /* FontNamesAndSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontNamesAndSizes.swift; sourceTree = "<group>"; };
+		49B5C26B2A8065A200F9D6FF /* String+Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ex.swift"; sourceTree = "<group>"; };
 		5CE83020B85DB3E27D7567B1 /* Pods-ToDoList_DocuSketch_Test.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToDoList_DocuSketch_Test.release.xcconfig"; path = "Target Support Files/Pods-ToDoList_DocuSketch_Test/Pods-ToDoList_DocuSketch_Test.release.xcconfig"; sourceTree = "<group>"; };
 		9B5361A52B443C96B8B72447 /* Pods-ToDoList_DocuSketch_Test.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToDoList_DocuSketch_Test.debug.xcconfig"; path = "Target Support Files/Pods-ToDoList_DocuSketch_Test/Pods-ToDoList_DocuSketch_Test.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -115,6 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				49B5C23E2A7E700B00F9D6FF /* UIViewController+Ex.swift */,
+				49B5C26B2A8065A200F9D6FF /* String+Ex.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -343,6 +346,7 @@
 				49B5C2272A7E477400F9D6FF /* SceneDelegate.swift in Sources */,
 				49B5C2392A7E4E0000F9D6FF /* ListOfTasksTableViewCell.swift in Sources */,
 				49B5C24E2A7FBE8F00F9D6FF /* TaskPosition.swift in Sources */,
+				49B5C26C2A8065A200F9D6FF /* String+Ex.swift in Sources */,
 				49B5C24C2A7FB42E00F9D6FF /* TaskEditingViewController.swift in Sources */,
 				49B5C2412A7E850B00F9D6FF /* PriorityImagesNames.swift in Sources */,
 			);

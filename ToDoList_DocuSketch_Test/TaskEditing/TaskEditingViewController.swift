@@ -32,6 +32,8 @@ final class TaskEditingViewController: TaskAddingViewController {
     override func setTextFields() {
         self.titleTextField.text = self.task.taskTitle
         self.decriptionTextField.text = self.task.taskDescription
+        
+        super.setTextFields()
     }
     
     override func setNavigationBar() {
@@ -52,6 +54,7 @@ extension TaskEditingViewController {
         guard let title = self.titleTextField.text else { return }
         self.task = TaskModel(taskTitle: title, taskDescription: self.decriptionTextField.text, priorityLevel: self.priorityLevel)
         self.completion?(self.task)
+        
         super.doneButtonTapped()
     }
     

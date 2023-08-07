@@ -117,10 +117,9 @@ final class TaskInfoViewController: UIViewController {
     }
     
     private func setDescriptionLabel() {
-        self.descriptionlabel.text = "Task description:\n\n\(self.task.taskDescription ?? "")"
+        self.descriptionlabel.attributedText = self.task.taskDescription?.createAttributedDescriptionText()
         self.descriptionlabel.lineBreakMode = .byWordWrapping
         self.descriptionlabel.numberOfLines = 0
-        self.descriptionlabel.font = UIFont(name: FontNames.regular.rawValue, size: FontSizes.regular.rawValue)
     }
 }
 

@@ -112,6 +112,8 @@ class TaskAddingViewController: UIViewController {
             $0.backgroundColor = UIColor(red: 225/255, green: 225/255, blue: 225/255, alpha: 1)
             $0.clipsToBounds = true
             $0.layer.cornerRadius = 10
+            $0.isUserInteractionEnabled = true
+            $0.delegate = self
             
             switch $0 {
             case self.titleTextField:
@@ -283,6 +285,15 @@ class TaskAddingViewController: UIViewController {
         default:
             return ""
         }
+    }
+}
+
+// MARK: - UITextFieldDelegate
+
+extension TaskAddingViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }
 
