@@ -44,10 +44,7 @@ final class ListOfTasksViewController: UIViewController {
         
     // MARK: - GUI
     
-    private lazy var listofTasksTableView: UITableView = {
-        let tableView = UITableView()
-        return tableView
-    }()
+    private lazy var listofTasksTableView = UITableView()
     
     // MARK: - Lifecycle
 
@@ -76,10 +73,11 @@ final class ListOfTasksViewController: UIViewController {
     }
     
     private func setTableView() {
-        self.listofTasksTableView.delegate = self
-        self.listofTasksTableView.dataSource = self
-        self.listofTasksTableView.backgroundColor = .white
-        self.listofTasksTableView.register(ListOfTasksTableViewCell.self, forCellReuseIdentifier: CellsNames.list.rawValue)
+        let tableView = self.listofTasksTableView
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.backgroundColor = .white
+        tableView.register(ListOfTasksTableViewCell.self, forCellReuseIdentifier: CellsNames.list.rawValue)
     }
     
     // MARK: - Add subviews
