@@ -17,10 +17,7 @@ class TaskAddingViewController: UIViewController {
     
     // MARK: - GUI
     
-    private lazy var priorityStackView: UIStackView = {
-        let view = UIStackView()
-        return view
-    }()
+    private lazy var priorityStackView = UIStackView()
     
     private lazy var redPriorityButton: UIButton = {
         let button = UIButton(type: .custom)
@@ -81,7 +78,8 @@ class TaskAddingViewController: UIViewController {
     }
     
     private func setPriorityStackView() {
-        self.priorityStackView.axis = .horizontal
+        let stackView = self.priorityStackView
+        stackView.axis = .horizontal
     }
     
     private func setPriorityButtons() {
