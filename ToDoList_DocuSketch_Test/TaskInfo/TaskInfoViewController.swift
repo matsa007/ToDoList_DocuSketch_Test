@@ -17,20 +17,11 @@ final class TaskInfoViewController: UIViewController {
     
     // MARK: - GUI
     
-    private lazy var titlelabel: UILabel = {
-        let label = UILabel()
-        return label
-    }()
+    private lazy var titlelabel = UILabel()
     
-    private lazy var priorityImageView: UIImageView = {
-        let view = UIImageView()
-        return view
-    }()
+    private lazy var priorityImageView = UIImageView()
     
-    private lazy var descriptionlabel: UILabel = {
-        let label = UILabel()
-        return label
-    }()
+    private lazy var descriptionlabel = UILabel()
     
     // MARK: - Initialization
         
