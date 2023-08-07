@@ -6,7 +6,7 @@
 
 ## Todo List App Screenshots
 
-<img src="https://github.com/matsa007/ToDoList_DocuSketch_Test/blob/main/readme_screenshots/1.png" width="375" height="812" alt="Image">
+<img src="https://github.com/matsa007/ToDoList_DocuSketch_Test/blob/main/readme_screenshots/1.png" width="375" height="812" alt="Image"> <img src="https://github.com/matsa007/ToDoList_DocuSketch_Test/blob/main/readme_screenshots/2.png" width="375" height="812" alt="Image">
 
 
 ## Description
