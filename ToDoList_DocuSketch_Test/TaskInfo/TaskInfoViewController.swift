@@ -137,8 +137,10 @@ extension TaskInfoViewController {
             self.task = task
             self.titlelabel.text = self.task.taskTitle
             self.descriptionlabel.text = self.task.taskDescription
+            self.priorityImageView.image = nil
             self.priorityImageView.image = UIImage(named: imageName)
             self.closure?(self.task, self.position)
+            self.navigationController?.popViewController(animated: true)
         }
         
         vc.closureVoid = { [weak self] in
