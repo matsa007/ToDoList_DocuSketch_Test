@@ -6,7 +6,7 @@
 
 ## Todo List App Screenshots
 
-<img src="https://github.com/matsa007/ToDoList_DocuSketch_Test/blob/main/readme_screenshots/1.png" width="187.5" height="406" alt="Image"> <img src="https://github.com/matsa007/ToDoList_DocuSketch_Test/blob/main/readme_screenshots/2.png" width="187.5" height="406" alt="Image">
+<img src="https://github.com/matsa007/ToDoList_DocuSketch_Test/blob/main/readme_screenshots/1.png" width="187.5" height="406" alt="Image"> <img src="https://github.com/matsa007/ToDoList_DocuSketch_Test/blob/main/readme_screenshots/2.png" width="187.5" height="406" alt="Image"> <img src="https://github.com/matsa007/ToDoList_DocuSketch_Test/blob/main/readme_screenshots/3.png" width="187.5" height="406" alt="Image"> <img src="https://github.com/matsa007/ToDoList_DocuSketch_Test/blob/main/readme_screenshots/4.png" width="187.5" height="406" alt="Image"> <img src="https://github.com/matsa007/ToDoList_DocuSketch_Test/blob/main/readme_screenshots/5.png" width="187.5" height="406" alt="Image"> <img src="https://github.com/matsa007/ToDoList_DocuSketch_Test/blob/main/readme_screenshots/6.png" width="187.5" height="406" alt="Image"> <img src="https://github.com/matsa007/ToDoList_DocuSketch_Test/blob/main/readme_screenshots/7.png" width="187.5" height="406" alt="Image"> <img src="https://github.com/matsa007/ToDoList_DocuSketch_Test/blob/main/readme_screenshots/8.png" width="187.5" height="406" alt="Image">
 
 
 ## Description
