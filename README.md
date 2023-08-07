@@ -31,8 +31,8 @@ A simple Todo List application to manage your tasks. You can add, edit, and dele
 
 1. Clone repository:
 ```
-$ git clone https://github.com/your-username/todo-list-app.git
-cd todo-list-app
+$ git clone https://github.com/your-username/todo-list-app.git](https://github.com/matsa007/ToDoList_DocuSketch_Test
+cd ToDoList_DocuSketch_Test
 ```
 2. CocoaPods is a dependency manager for Cocoa projects. You can install it with the following command:
 ```
