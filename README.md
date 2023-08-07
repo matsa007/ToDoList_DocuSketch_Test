@@ -6,7 +6,7 @@
 
 ## Todo List App Screenshots
 
-![Todo List App Screenshot](https://drive.google.com/file/d/1sBHo5vGWQGwhV6uq7AGY6dBHRBBCjDxW/view?usp=drive_link)
+![Todo List App Screenshot](https://github.com/matsa007/ToDoList_DocuSketch_Test/blob/main/readme_screenshots/1.png)
 
 
 ## Description
