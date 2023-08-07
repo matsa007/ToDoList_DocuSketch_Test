@@ -34,7 +34,7 @@ cd todo-list-app
 $ sudo gem install cocoapods
 
 ```
-3. To integrate SnapKit into your Xcode project using CocoaPods, specify it in your Podfile:
+3. To integrate SnapKit into your Xcode project using CocoaPods, specify it in your `Podfile`:
 ```
 source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '10.0'
@@ -52,3 +52,24 @@ $ pod install
 ```
 $ open ToDoList_DocuSketch_Test.xcworkspace
 ```
+5. Select the target device or simulator from the top-left dropdown menu.
+
+6. Click the "Run" button or use the shortcut `Cmd + R` to build and run.
+
+## Using SnapKit
+
+This application utilizes SnapKit for a more convenient and declarative approach to creating layout constraints for the interface. For example, to add a view with automatic constraint creation, use the following code:
+```
+import SnapKit
+
+let myView = UIView()
+self.view.addSubview(myView)
+
+myView.snp.makeConstraints { make in
+    make.top.equalToSuperview().offset(20)
+    make.left.equalToSuperview().offset(16)
+    make.right.equalToSuperview().offset(-16)
+    make.height.equalTo(50)
+}
+```
+With SnapKit, you can define constraints easily and efficiently, making your UI layout code cleaner and more maintainable.
