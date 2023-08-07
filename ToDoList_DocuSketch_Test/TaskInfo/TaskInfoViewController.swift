@@ -97,20 +97,23 @@ final class TaskInfoViewController: UIViewController {
     }
     
     private func setTitleLabel() {
-        self.titlelabel.text = self.task.taskTitle
-        self.titlelabel.textAlignment = .center
-        self.titlelabel.font = UIFont(name: FontNames.bold.rawValue, size: FontSizes.bold.rawValue)
+        let label = self.titlelabel
+        label.text = self.task.taskTitle
+        label.textAlignment = .center
+        label.font = UIFont(name: FontNames.bold.rawValue, size: FontSizes.bold.rawValue)
     }
     
     private func setPriorityImage() {
+        let imageView = self.priorityImageView
         guard let imageName = self.task.priorityLevel else { return }
-        self.priorityImageView.image = UIImage(named: imageName)
+        imageView.image = UIImage(named: imageName)
     }
     
     private func setDescriptionLabel() {
-        self.descriptionlabel.attributedText = self.task.taskDescription?.createAttributedDescriptionText()
-        self.descriptionlabel.lineBreakMode = .byWordWrapping
-        self.descriptionlabel.numberOfLines = 0
+        let label = self.descriptionlabel
+        label.attributedText = self.task.taskDescription?.createAttributedDescriptionText()
+        label.lineBreakMode = .byWordWrapping
+        label.numberOfLines = 0
     }
 }
 
